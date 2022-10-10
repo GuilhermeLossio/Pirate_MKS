@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 4438734523897236728}
   - component: {fileID: 4438734523897236735}
   - component: {fileID: 3014734196145893388}
+  - component: {fileID: 8670800521098384151}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -101,12 +102,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 825977ded982dc14e9f65daeff01aa9d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  bullet: {fileID: 1295564705319173000, guid: 227da511ed096a14795b0257db9df861, type: 3}
   driftFactor: 0.95
   accelerationFactor: 30
   turnFactor: 3.5
   maxSpeed: 20
   shipDead: {fileID: 0}
   shipDestroyed: {fileID: 0}
+  isChasing: 0
 --- !u!50 &4438734523897236730
 Rigidbody2D:
   serializedVersion: 4
@@ -166,10 +169,12 @@ PolygonCollider2D:
       - {x: -0.65999997, y: -0.13}
       - {x: -0.6223196, y: -0.34677503}
       - {x: -0.57350636, y: -0.6621636}
-      - {x: -0.42, y: -0.66999996}
-      - {x: -0.29999998, y: -0.89}
-      - {x: -0.099999994, y: -1.13}
-      - {x: 0.12, y: -1.13}
+      - {x: -0.79718226, y: -0.065624}
+      - {x: -0.16589704, y: 0.019009948}
+      - {x: -0.024185747, y: -0.15202093}
+      - {x: -0.094762966, y: -0.18144357}
+      - {x: 0.0030638054, y: -0.11868644}
+      - {x: 0.12, y: 0.023026347}
       - {x: 0.29999998, y: -0.89}
       - {x: 0.41126418, y: -0.6429033}
       - {x: 0.5693114, y: -0.64253783}
@@ -283,3 +288,19 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!70 &8670800521098384151
+CapsuleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4438734523897236725}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0.5413502}
+  m_Size: {x: 1, y: 1.4627002}
+  m_Direction: 0

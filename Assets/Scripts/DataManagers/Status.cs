@@ -1,6 +1,8 @@
+[System.Serializable]
+
 public class Status
 {
     public string name;
-    public int life;
-    public int energy;
+    public int gameTime;
+    public int spawnEnemyTime;
 }

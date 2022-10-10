@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class PlayerScripts : MonoBehaviour
 {
+    public GameObject bullet;
+
     [Header("Ship main status")]
     public float driftFactor = 0.95f;
     public float accelerationFactor = 30.0f;
@@ -22,10 +24,16 @@ public class PlayerScripts : MonoBehaviour
 
     float velocityVsUp = 0;
 
+    public bool isChasing = false;
+
+    private Vector2 chasing;
+
 
     Rigidbody2D shipRB;
     Collider2D carCollider;
     ShipHandler shipHandler;
+
+    public GameObject enemyShip;
 
 
 
@@ -41,6 +49,19 @@ public class PlayerScripts : MonoBehaviour
         rotationAngle = transform.rotation.eulerAngles.z;
     }
 
+    void Update()
+    {
+        if (Input.GetKeyDown("space"))
+        {
+            Shot();
+        }
+
+        if (Input.GetKeyDown(KeyCode.F))
+        {
+            Chase();
+        }
+    }
+
     void FixedUpdate()
     {
         MotorForce();
@@ -49,12 +70,11 @@ public class PlayerScripts : MonoBehaviour
 
         ApplySteering();
 
-        Shot();
     }
 
     void Shot()
     {
-        
+        Instantiate(bullet, transform.position, transform.rotation);
     }
 
     void MotorForce()
@@ -150,6 +170,41 @@ public class PlayerScripts : MonoBehaviour
     public float GetVelocityMagnitude()
     {
         return shipRB.velocity.magnitude;
+    }
+
+
+
+    public void Chase()
+    {
+        if(isChasing == false)
+        {
+            chasing = transform.up * 3000f;
+            shipRB.AddForce(chasing);
+            isChasing = true;
+            Invoke("StopChase", 1f);
+        }
+
+    }
+
+    public void StopChase()
+    {
+        //shipRB.AddForce(-chasing);
+        isChasing = false;
+    }
+
+
+    void OnTriggerEnter2D(Collider2D other)
+    {
+        if(isChasing == true && other.gameObject.CompareTag("Enemy"))
+        {
+            enemyShip = other.gameObject.transform.parent.GetChild(1).gameObject;
+            //Debug.Log(other.gameObject.transform.parent.GetChild(1));
+
+            enemyShip.SendMessage("TakeAChase");
+
+
+        }
+        
     }
 
 }
