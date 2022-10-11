@@ -4859,6 +4859,7 @@ GameObject:
   - component: {fileID: 7419792442024345675}
   - component: {fileID: 13512641006331641}
   - component: {fileID: 4979489028040849844}
+  - component: {fileID: 1325750325}
   m_Layer: 0
   m_Name: Enemy
   m_TagString: Enemy
@@ -4873,7 +4874,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6599137827082440505}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -5001,6 +5002,25 @@ PolygonCollider2D:
       - {x: 0.5693114, y: -0.64253783}
       - {x: 0.63396704, y: -0.36387974}
   m_UseDelaunayMesh: 0
+--- !u!114 &1325750325
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6599137827082440505}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b2412e028b982504a9fea8c00bf82384, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  shipClass: 
+  bullet: {fileID: 0}
+  speed: 3
+  distanceBetweenPlayer: 20
+  distaceToAttack: 5
+  isAlive: 1
+  eventSys: {fileID: 0}
 --- !u!1 &8652651704124135206
 GameObject:
   m_ObjectHideFlags: 0
@@ -5073,7 +5093,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 5
+  m_SortingOrder: 6
   m_Sprite: {fileID: 21300022, guid: 1eaee135ce037439d925cee5e41ce026, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -5189,6 +5209,7 @@ MonoBehaviour:
   enemyShip: {fileID: 6599137827082440505}
   fireParticles: {fileID: 802746863602446691}
   lifeImage: {fileID: 6697804323467483988}
+  damagedShipImage: {fileID: 0}
   deadShipImage: {fileID: 21300000, guid: def4d3b713346e94885c94b35a824afd, type: 3}
 --- !u!82 &1487244297697704025
 AudioSource:

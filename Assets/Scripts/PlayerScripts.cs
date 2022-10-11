@@ -7,10 +7,10 @@ public class PlayerScripts : MonoBehaviour
     public GameObject bullet;
 
     [Header("Ship main status")]
-    public float driftFactor = 0.95f;
-    public float accelerationFactor = 30.0f;
-    public float turnFactor = 3.5f;
-    public float maxSpeed = 10;
+    [SerializeField] public float drift = 0.95f;
+    [SerializeField] public float accelFactor = 30.0f;
+    [SerializeField] public float turnFactor = 3.5f;
+    [SerializeField] public float maxSpeed = 10;
 
     [Header("Sprites")]
     public SpriteRenderer shipDead;
@@ -18,7 +18,7 @@ public class PlayerScripts : MonoBehaviour
 
     //Speed variables
     float accelerationInput = 0;
-    float steeringInput = 0;
+    float steering = 0;
 
     float rotationAngle = 0;
 
@@ -29,8 +29,8 @@ public class PlayerScripts : MonoBehaviour
     private Vector2 chasing;
 
 
-    Rigidbody2D shipRB;
-    Collider2D carCollider;
+    private Rigidbody2D shipRB;
+    private Collider2D carCollider;
     ShipHandler shipHandler;
 
     public GameObject enemyShip;
@@ -94,10 +94,7 @@ public class PlayerScripts : MonoBehaviour
             shipRB.drag = 0;
         }
 
-
         velocityVsUp = Vector2.Dot(transform.up, shipRB.velocity);
-
-
 
         if (velocityVsUp > maxSpeed && accelerationInput > 0)
         {
@@ -109,14 +106,13 @@ public class PlayerScripts : MonoBehaviour
             return;
         }
 
-        //Limit so we cannot go faster in any direction while accelerating
         if (shipRB.velocity.sqrMagnitude > maxSpeed * maxSpeed && accelerationInput > 0)
         {
             return;
         }   
 
         
-        Vector2 motorForce = transform.up * accelerationInput * accelerationFactor;
+        Vector2 motorForce = transform.up * accelerationInput * accelFactor;
 
         shipRB.AddForce(motorForce, ForceMode2D.Force);
     }
@@ -126,7 +122,7 @@ public class PlayerScripts : MonoBehaviour
         float minSpeedToTurn = (shipRB.velocity.magnitude / 2);
         minSpeedToTurn = Mathf.Clamp01(minSpeedToTurn);
 
-        rotationAngle -= steeringInput * turnFactor * minSpeedToTurn;
+        rotationAngle -= steering * turnFactor * minSpeedToTurn;
 
         shipRB.MoveRotation(rotationAngle);
     }
@@ -136,7 +132,7 @@ public class PlayerScripts : MonoBehaviour
         Vector2 forwardVelocity = transform.up * Vector2.Dot(shipRB.velocity, transform.up);
         Vector2 rightVelocity = transform.right * Vector2.Dot(shipRB.velocity, transform.right);
 
-        shipRB.velocity = forwardVelocity + rightVelocity * driftFactor;
+        shipRB.velocity = forwardVelocity + rightVelocity * drift;
     }
 
     float LateralSpeed()
@@ -163,7 +159,7 @@ public class PlayerScripts : MonoBehaviour
 
     public void SetInputVector(Vector2 inputVector)
     {
-        steeringInput = inputVector.x;
+        steering = inputVector.x;
         accelerationInput = inputVector.y;
     }
 
@@ -204,7 +200,5 @@ public class PlayerScripts : MonoBehaviour
 
 
         }
-        
     }
-
 }

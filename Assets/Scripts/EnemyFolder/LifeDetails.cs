@@ -5,25 +5,21 @@ using UnityEngine;
 public class LifeDetails : MonoBehaviour
 {
 
-    public int life = 10;
+    [SerializeField] public int life = 10;
 
     public GameObject enemyShip;
 
     public GameObject fireParticles;
 
+    private GameObject eventListner;
+
 
     public SpriteRenderer lifeImage;
 
+    public Sprite damagedShipImage;
+
     public Sprite deadShipImage;
 
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
     void FixedUpdate()
     {
         transform.position = enemyShip.transform.position + new Vector3(0, 0.676f, 0);
@@ -43,6 +39,15 @@ public class LifeDetails : MonoBehaviour
 
                 GetComponent<AudioSource>().Play(0);
                 fireParticles.SetActive(true);
+
+                eventListner = GameObject.Find("EventSystem");
+                eventListner.SendMessage("UpdateScore");
+                Invoke("DestroyMe", 4f);
+                enemyShip.GetComponent<EnemyMovementAndActions>().isAlive = false;
+            }
+            else if(life <= 5)
+            {
+                enemyShip.GetComponent<SpriteRenderer>().sprite = damagedShipImage;
             }
         }
 
@@ -61,8 +66,20 @@ public class LifeDetails : MonoBehaviour
             GetComponent<AudioSource>().Play(0);
             fireParticles.SetActive(true);
 
+            eventListner = GameObject.Find("EventSystem");
+            eventListner.SendMessage("UpdateScore");
+            Invoke("DestroyMe", 4f);
+            enemyShip.GetComponent<EnemyMovementAndActions>().isAlive = false;
+
+
         }
 
+    }
+
+
+    private void DestroyMe()
+    {
+        Destroy(gameObject.transform.parent.gameObject);
     }
 
 }

@@ -3,7 +3,12 @@ guid: e506cf89b9a4c5e46b4726aaa486959f
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - restantTime: {instanceID: 0}
+  - score: {instanceID: 0}
+  - player: {instanceID: 0}
+  - chaserEnemy: {fileID: 2985328244579495303, guid: 2af9e6e72a6884a4fa41434508cd3d31, type: 3}
+  - shooterEnemy: {fileID: 1157177343635696747, guid: 75a8de6cc516e5f4489f0aee962e488a, type: 3}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 
