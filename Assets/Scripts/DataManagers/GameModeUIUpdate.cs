@@ -72,6 +72,10 @@ public class GameModeUIUpdate : MonoBehaviour
     {
         gameTime--;
         restantTime.text = gameTime.ToString();
+        if(gameTime <= 0)
+        {
+            Die();
+        }
     }
 
     public void UpdateScore()
